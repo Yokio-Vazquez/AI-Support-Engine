@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, field_validator
 
 
 Category = Literal["ACCESS", "BUG", "FEATURE", "SECURITY"]
@@ -22,8 +22,10 @@ class AnalysisRequest(BaseModel):
 
 
 class AnalysisResult(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     category: Category
     priority: Priority
-    response: str
-    requiresHumanReview: bool
+    response: str = Field(min_length=1, max_length=2000)
+    requiresHumanReview: StrictBool
     mode: Mode

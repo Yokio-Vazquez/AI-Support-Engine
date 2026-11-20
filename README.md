@@ -11,8 +11,8 @@ La parte 1 contiene:
 - Respuestas predeterminadas.
 - Pruebas de motor y API.
 
-La parte generativa se integrará en `app/routes/analyze.py` y requerirá una implementación
-real del motor en `app/services/generative_engine.py`.
+El endpoint también integra OpenRouter para análisis generativo. Ambos modos devuelven
+el mismo contrato de respuesta.
 
 ## Requisitos
 
@@ -32,6 +32,23 @@ python -m pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
+## Configuración de OpenRouter
+
+1. Copia `.env.example` a `.env`.
+2. En `.env`, configura `OPENROUTER_API_KEY` y `OPENROUTER_MODEL` con una clave y un
+   identificador de modelo disponibles en tu cuenta de OpenRouter. El modelo debe
+   admitir respuestas en formato JSON.
+3. Reinicia la aplicación después de cambiar la configuración.
+
+La clave es confidencial: no la subas al repositorio ni la compartas. El modo
+`generative` envía el mensaje de soporte a OpenRouter y al proveedor del modelo elegido;
+no uses datos sensibles reales en esta demostración.
+
+La API devuelve un error `503` si faltan variables de configuración, `504` si vence
+el tiempo de espera y `502` si el proveedor falla o devuelve una respuesta inválida.
+Las respuestas del modelo se validan con el esquema compartido; una indicación de
+seguridad detectada por cualquiera de los motores siempre activa la revisión humana.
+
 Documentación interactiva:
 
 - http://127.0.0.1:8000/docs
@@ -43,6 +60,14 @@ Documentación interactiva:
 curl.exe -X POST "http://127.0.0.1:8000/api/analyze" `
   -H "Content-Type: application/json" `
   -d '{\"message\":\"No puedo iniciar sesion\",\"mode\":\"traditional\"}'
+```
+
+## Ejemplo generativo
+
+```powershell
+curl.exe -X POST "http://127.0.0.1:8000/api/analyze" `
+  -H "Content-Type: application/json" `
+  -d '{\"message\":\"No puedo iniciar sesion\",\"mode\":\"generative\"}'
 ```
 
 ## Contrato de respuesta
