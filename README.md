@@ -146,3 +146,9 @@ correctamente los incidentes de seguridad activando revisión humana. Para produ
 el motor de reglas ofrece mayor predictibilidad, mientras que el generativo aporta
 flexibilidad interpretativa que requiere ajustes de prompt y validaciones adicionales
 para ser confiable.
+
+### Integrantes:
+
+Yokio Yosafat Vazquez Carrillo
+Salomon Alvarez Gomez
+Diego de Jesus Huerta Barroso
