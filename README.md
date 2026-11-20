@@ -87,3 +87,19 @@ curl.exe -X POST "http://127.0.0.1:8000/api/analyze" `
 ```powershell
 python -m pytest -v
 ```
+
+## Evaluación comparativa
+
+`data/comparative_cases.json` contiene casos de referencia normales, ambiguos y dos
+intentos de inyección de instrucciones. Con OpenRouter configurado en `.env`, ejecuta
+ambos motores y registra las respuestas en CSV:
+
+```powershell
+python -m app.comparative
+```
+
+El reporte `results/comparative_results.csv` incluye la validez del contrato, categoría
+y prioridad obtenidas, revisión humana y acierto contra las referencias. La
+clasificación exacta requiere que coincidan tanto la categoría como la prioridad; el
+resumen también muestra la precisión de categoría por separado. La ejecución generativa
+real requiere conexión a OpenRouter y consume solicitudes del proveedor.
