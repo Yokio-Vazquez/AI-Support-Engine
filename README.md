@@ -150,5 +150,8 @@ para ser confiable.
 ### Integrantes:
 
 Yokio Yosafat Vazquez Carrillo
+
 Salomon Alvarez Gomez
+
 Diego de Jesus Huerta Barroso
+
